@@ -56,6 +56,8 @@
              <th>MRP</th>
              <th>purchase Exc Price</th>
              <th>purchase Inc Price</th>
+             <th>Tax Amount</th>
+             <th>Unit Price</th>
             <th>Selling Price</th>
             <th>Action</th>
         </tr>
@@ -94,7 +96,16 @@
 </div>
 <div class="row mt-3">
     <div class="col-12 d-flex justify-content-end">
-        <h4>Total Purchase Amount: <span id="total_purchase_amount">0.00</span></h4>
+        <h5>Sub Total: <span id="subtotal">0.00</span></h5><br>
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+        <h5>shipping Charge: <span id="shipping">0.00</span></h5><br>
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+        <h5>Discount: <span id="discount">0.00</span></h5><br>
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+        <h4>Total Purchase Amount: <span id="grand_total">0.00</span></h4>
     </div>
     </div>
    <div class="row mt-3">

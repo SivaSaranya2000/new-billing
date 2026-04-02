@@ -20,6 +20,7 @@ class Product extends Model
         'manage_stock',
         'product_type',
         'tax_type',
+        
     ];
     public function price()
     {

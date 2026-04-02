@@ -2,6 +2,7 @@
   <table class="table table-bordered">
     <tr>
       <th>MRP</th>
+      <th>Unit price</th>
       <th>Default Purchase Price</th>
       <th>X margin(%)</th>
       <th>Default Selling Price</th>
@@ -11,6 +12,12 @@
       <div class="col-md-12">
         &nbsp;
         <input type="text" class="form-control mt-2" name="mrp" id="mrp" placeholder="Enter MRP">
+      </div>
+    </td>
+    <td>
+      <div class="col-md-12">
+        &nbsp;
+        <input type="text" class="form-control mt-2" name="unit_price" id="unit_price" placeholder="Enter unit_price">
       </div>
     </td>
     <td>
@@ -29,15 +36,22 @@
       <div class="col-md-12">
         &nbsp;
          <input type="text" class="form-control mt-2" name="margin" value= "5" id="margin" placeholder="Enter Margin">
-  </div>
-    </td>
+  <input type="hidden" class="form-control mt-2" name="tax_amount" value= "" id="tax_amount">
+    </div>
+</td>
    <td>
+    <!-- <div class="row"> -->
     <div class="col-md-12">
       <label class="form-label">Exc Tax:</label>
       <input type="text" class="form-control" name="sell_exc_price" id="sell_exc_price" placeholder="Enter Sale Price">
-      <input type="hidden" class="form-control" name="sell_inc_price" id="sell_inc_price" value="" placeholder="Enter Sale Price">
+       <input type="hidden" class="form-control" name="sell_inc_price" id="sell_inc_price" value="" placeholder="Enter Sale Price">
 
     </div>
+<!-- <div class="col-md-6"> -->
+  <!-- <label class="form-label">Inc Tax:</label> -->
+
+<!-- </div> -->
+    <!-- </div> -->
     </td>
     </tr>
   </table>

@@ -72,12 +72,14 @@ class ProductController extends Controller
         ProductPrice::create([
             'product_id' => $product->id,
             'mrp' => $request->mrp,
+            'unit_price' => $request->unit_price,
             'purchase_exc_tax' => $request->purchase_exc_tax,
             'purchase_inc_tax' => $request->purchase_inc_tax,
             'margin' => $request->margin,
             'sell_exc_price' => $request->sell_exc_price,
             'sell_inc_price' => $request->sell_inc_price,
-            'tax_percentage' => $request->tax_percentage
+            'tax_percentage' => $request->tax_percentage,
+            'tax_amount' => $request->tax_amount,
         ]);
  
         DB::commit();
@@ -110,9 +112,12 @@ public function search(Request $request)
             'product_prices.sell_exc_price',
             'product_prices.purchase_exc_tax',
             'product_prices.purchase_inc_tax',
-            'product_prices.mrp'
+            'product_prices.mrp',
+            'product_prices.unit_price',
+            'product_prices.tax_amount',
+            
         )
-        ->limit(10)
+        ->limit(15)
         ->get();
 
     return response()->json($products);

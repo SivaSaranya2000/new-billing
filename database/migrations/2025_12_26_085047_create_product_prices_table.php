@@ -15,12 +15,14 @@ return new class extends Migration
          $table->id();
          $table->unsignedBigInteger('product_id');
          $table->decimal('mrp', 10, 2)->nullable();
+         $table->decimal('unit_price', 10, 2)->nullable();
          $table->decimal('purchase_exc_tax', 10, 2)->nullable();
          $table->decimal('purchase_inc_tax', 10, 2)->nullable();
          $table->decimal('margin', 5, 2)->nullable();
          $table->decimal('sell_exc_price', 10, 2)->nullable();
          $table->decimal('sell_inc_price', 10, 2)->nullable();
          $table->decimal('tax_percentage', 5, 2)->nullable();
+         $table->decimal('tax_amount', 5, 2)->nullable();
          $table->timestamps();
 
         // Foreign key
