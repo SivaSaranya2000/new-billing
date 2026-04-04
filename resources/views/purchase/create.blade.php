@@ -15,7 +15,7 @@
         @endforeach
       </select>
       </div>
-        <div class="col-md-4">
+<div class="col-md-4">
     <label class="form-label">Purchase Date:*</label>
     <input type="text" class="form-control" name="purchase_date" id="purchase_date" required>
 </div>

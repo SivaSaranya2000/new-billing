@@ -52,6 +52,7 @@ $(document).ready(function () {
         }
     }
 
+
    function calculateTaxAmounts() {
     let sellExc = parseFloat($("#sell_exc_price").val()) || 0;
     let tax = parseFloat($("#tax_percentage").val()) || 0;
