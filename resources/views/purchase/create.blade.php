@@ -106,12 +106,14 @@
     </div>
     <div class="col-12 d-flex justify-content-end">
         <h4>Total Purchase Amount: <span id="grand_total">0.00</span></h4>
+        <input type="hidden" name="grand_total" id="grand_total_input">
     </div>
     </div>
    <div class="row mt-3">
     <div class="col-12 d-flex justify-content-center">
         <button type="submit" class="btn btn-success">Add Purchase</button>
     </div>
+    
 </div>
 </form>
 </div>

@@ -131,6 +131,7 @@ function calculateGrandTotal() {
        $("#subtotal").text(subtotal.toFixed(2));
        $("#shipping").text(shipping.toFixed(2));
        $("#discount").text(discount.toFixed(2));
+       $("#grand_total_input").val(grandTotal.toFixed(2));
     $("#balance_amount").val(balance.toFixed(2));
 }
 
