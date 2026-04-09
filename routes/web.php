@@ -13,6 +13,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SellController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -76,3 +77,12 @@ Route::post('/business-settings/{id}', [BusinessController::class, 'update'])->n
 Route::get('/business-settings/{id}', [BusinessController::class, 'destroy'])->name('business-settings.destroy');
 // Category Resource Route
 Route::resource('categories', CategoryController::class);
+
+//sellcontroller
+Route::resource('sell', SellController::class);
+
+
+
+
+
+

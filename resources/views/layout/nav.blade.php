@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/sale.css') }}">
 
 </head>
 <body>
@@ -22,8 +23,8 @@
 <a href="{{ route('register') }}"><i class="fas fa-chart-line"></i> Register</a>
 <a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a>
 <a href="{{ route('products.index') }}"><i class="fas fa-boxes"></i> Products</a>
-<!-- <a href="bill.html"><i class="fas fa-file-invoice"></i> Create Bill</a>
-<a href="history.html"><i class="fas fa-history"></i> Bill History</a>
+<a href="{{ route('sell.index') }}"><i class="fas fa-file-invoice"></i> Create Bill</a>
+<!--<a href="history.html"><i class="fas fa-history"></i> Bill History</a>
 <a href="gst-invoice.html"><i class="fas fa-receipt"></i> GST Invoice</a>
 <a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a>
 <a href="product-stock.html"><i class="fas fa-warehouse"></i> Product Stock</a> -->
@@ -36,7 +37,7 @@
 <a href="{{ route('categories.index') }}"><i class="fas fa-list"></i> Category</a>
 <a href="{{ route('business-settings.index') }}"><i class="fas fa-building"></i> Business & Settings</a>
 <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
-</div>
+</div> 
 
  <main class="main-content">
     @yield('content')
