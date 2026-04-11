@@ -2,7 +2,7 @@
   <table class="table table-bordered">
     <tr>
       <th>MRP</th>
-      <th>Unit price</th>
+      <!-- <th>Unit price</th> -->
       <th>Default Purchase Price</th>
       <th>X margin(%)</th>
       <th>Default Selling Price</th>
@@ -14,12 +14,12 @@
         <input type="text" class="form-control mt-2" name="mrp" id="mrp" placeholder="Enter MRP">
       </div>
     </td>
-    <td>
+    <!-- <td>
       <div class="col-md-12">
         &nbsp;
         <input type="text" class="form-control mt-2" name="unit_price" id="unit_price" placeholder="Enter unit_price">
       </div>
-    </td>
+    </td> -->
     <td>
       <div class="row">
       <div class="col-md-6">

@@ -10,7 +10,6 @@ $(document).ready(function () {
         let exc = 0, inc = 0;
 
         if (type === "inclusive") {
-            // 🔥 Your logic
             inc = unit;
             exc = unit * (1 + taxVal);
         } else {
