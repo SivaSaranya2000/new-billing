@@ -1,129 +1,97 @@
 $(document).ready(function () {
 
-    function calculatePurchase() {
-        let unit = parseFloat($("#unit_price").val()) || 0;
-        let tax = parseFloat($("#tax_percentage").val()) || 0;
-        let type = $("#tax").val();
+    let lastEdited = "";
 
-        let taxVal = tax / 100;
+    // 🔹 Purchase EXC change
+    $("#purchase_exc_tax").on("keyup change", function () {
 
-        let exc = 0, inc = 0;
+        lastEdited = "exc";
 
-        if (type === "inclusive") {
-            inc = unit;
-            exc = unit * (1 + taxVal);
-        } else {
-            exc = unit;
-            inc = unit * (1 + taxVal);
-        }
+        let purchaseExc = parseFloat($(this).val()) || 0;
+        let margin = parseFloat($("#margin").val()) || 0;
 
-        $("#purchase_exc_tax").val(exc.toFixed(2));
-        $("#purchase_inc_tax").val(inc.toFixed(2));
-    }
+        let sellExc = purchaseExc + margin;
 
-    function calculateSelling() {
-        let unit = parseFloat($("#unit_price").val()) || 0;
+        $("#sell_exc_price").val(sellExc.toFixed(2));
+    });
+
+    // 🔹 Purchase INC change
+    $("#purchase_inc_tax").on("keyup change", function () {
+
+        lastEdited = "inc";
+
+        let purchaseInc = parseFloat($(this).val()) || 0;
+        let margin = parseFloat($("#margin").val()) || 0;
+
+        let sellInc = purchaseInc + margin;
+
+        $("#sell_inc_price").val(sellInc.toFixed(2));
+    });
+
+    // 🔥 COMMON TAX CALCULATION FUNCTION
+    function taxcalculation() {
+
+        let purchaseExc = parseFloat($("#purchase_exc_tax").val()) || 0;
+        let purchaseInc = parseFloat($("#purchase_inc_tax").val()) || 0;
         let margin = parseFloat($("#margin").val()) || 0;
         let tax = parseFloat($("#tax_percentage").val()) || 0;
 
         let taxVal = tax / 100;
 
-        let sellExc = unit * (1 + margin / 100);
-        let sellInc = sellExc * (1 + taxVal);
+        // ✅ Selling EXC
+        let sellExc = purchaseExc + margin;
+
+        // ✅ Tax
+        let taxAmount = purchaseInc * taxVal;
+
+        // ✅ Selling INC
+        let sellInc = purchaseInc + margin + taxAmount;
 
         $("#sell_exc_price").val(sellExc.toFixed(2));
-        $("#sell_inc_price").val(sellInc.toFixed(2)); 
-    }
-
-    function reverseFromSelling() {
-        let sellExc = parseFloat($("#sell_exc_price").val()) || 0;
-        let unit = parseFloat($("#unit_price").val()) || 0;
-        let tax = parseFloat($("#tax_percentage").val()) || 0;
-
-        let taxVal = tax / 100;
-
-        let sellInc = sellExc * (1 + taxVal);
         $("#sell_inc_price").val(sellInc.toFixed(2));
-
-        if (unit > 0) {
-            let margin = ((sellExc - unit) / unit) * 100;
-            $("#margin").val(margin.toFixed(2));
-        }
+        $("#tax_amount").val(taxAmount.toFixed(2));
     }
 
+    // 🔥 Margin change → update BOTH
+    $("#margin").on("keyup change", function () {
+        taxcalculation();
+    });
 
-   function calculateTaxAmounts() {
-    let sellExc = parseFloat($("#sell_exc_price").val()) || 0;
-    let tax = parseFloat($("#tax_percentage").val()) || 0;
+    // 🔥 Tax change → update BOTH
+    $("#tax_percentage").on("keyup change", function () {
+        taxcalculation();
+    });
 
-    let taxVal = tax / 100;
+    // 🔥 Purchase change → also trigger tax calc
+    $("#purchase_exc_tax, #purchase_inc_tax").on("keyup change", function () {
+        validatePurchase();
+        taxcalculation();
+    });
 
-    let sellingTax = sellExc * taxVal;
+    // 🔹 Manual Selling EXC change
+    $("#sell_exc_price").on("keyup change", function () {
 
-    $("#tax_amount").val(sellingTax.toFixed(2));
-}
+        let sellExc = parseFloat($(this).val()) || 0;
+        let purchaseExc = parseFloat($("#purchase_exc_tax").val()) || 0;
 
-    function validateMRP() {
-        let mrp = parseFloat($("#mrp").val()) || 0;
-        let sellInc = parseFloat($("#sell_inc_price").val()) || 0;
+        let margin = sellExc - purchaseExc;
 
-        if (mrp > 0 && sellInc > mrp) {
+        $("#margin").val(margin.toFixed(2));
+    });
+
+    // 🔹 Validation FIXED
+    function validatePurchase() {
+
+        let purchaseInc = parseFloat($("#purchase_inc_tax").val()) || 0;
+        let purchaseExc = parseFloat($("#purchase_exc_tax").val()) || 0;
+
+        if (purchaseExc > purchaseInc) {
             $("#priceAlert")
                 .removeClass("d-none")
-                .text("Selling price cannot be greater than MRP!");
-
-            $("#sell_exc_price").addClass("is-invalid");
-            return false;
+                .text("Purchase EXC should not be greater than Purchase INC!");
         } else {
             $("#priceAlert").addClass("d-none").text("");
-            $("#sell_exc_price").removeClass("is-invalid");
-            return true;
         }
     }
-
-    function fullCalculation() {
-        calculatePurchase();
-        calculateSelling();
-        calculateTaxAmounts(); 
-        validateMRP();
-    }
-
-    $("#unit_price, #tax_percentage, #margin").on("keyup change", function () {
-        fullCalculation();
-    });
-
-    $("#tax").on("change", function () {
-        fullCalculation();
-    });
-
-    $("#sell_exc_price").on("keyup change", function () {
-        reverseFromSelling();
-        calculateTaxAmounts();
-        validateMRP();
-    });
-
-    $("#purchase_exc_tax").on("keyup change", function () {
-        let exc = parseFloat($(this).val()) || 0;
-        let tax = parseFloat($("#tax_percentage").val()) || 0;
-
-        let inc = exc * (1 + tax / 100);
-        $("#purchase_inc_tax").val(inc.toFixed(2));
-
-        calculateSelling();
-        calculateTaxAmounts();
-    });
-
-    $("#purchase_inc_tax").on("keyup change", function () {
-        let inc = parseFloat($(this).val()) || 0;
-        let tax = parseFloat($("#tax_percentage").val()) || 0;
-
-        let exc = inc * (1 + tax / 100); 
-        $("#purchase_exc_tax").val(exc.toFixed(2));
-
-        calculateSelling();
-        calculateTaxAmounts();
-    });
-
-    fullCalculation();
 
 });

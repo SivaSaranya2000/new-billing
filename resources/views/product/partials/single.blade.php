@@ -35,16 +35,16 @@
     <td>
       <div class="col-md-12">
         &nbsp;
-         <input type="text" class="form-control mt-2" name="margin" value= "5" id="margin" placeholder="Enter Margin">
+  <input type="text" class="form-control mt-2" name="margin" value= "5" id="margin" placeholder="Enter Margin">
   <input type="hidden" class="form-control mt-2" name="tax_amount" value= "" id="tax_amount">
     </div>
 </td>
    <td>
     <!-- <div class="row"> -->
     <div class="col-md-12">
-      <label class="form-label">Exc Tax:</label>
-      <input type="text" class="form-control" name="sell_exc_price" id="sell_exc_price" placeholder="Enter Sale Price">
-       <input type="hidden" class="form-control" name="sell_inc_price" id="sell_inc_price" value="" placeholder="Enter Sale Price">
+      <label class="form-label">Selling price:</label>
+      <input type="hidden" class="form-control" name="sell_exc_price" id="sell_exc_price" placeholder="Enter Sale Price">
+       <input type="text" class="form-control" name="sell_inc_price" id="sell_inc_price" value="" placeholder="Enter Sale Price">
 
     </div>
 <!-- <div class="col-md-6"> -->
