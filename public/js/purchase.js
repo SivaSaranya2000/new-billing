@@ -105,7 +105,7 @@ $(document).on('keyup change', '.qty', function () {
     row.find('.price').val((qty * basePrice).toFixed(2));
     row.find('.tax_amount').val((qty * baseTax).toFixed(2));
 
-    calculateGrandTotal(); // 
+    calculateGrandTotal(); 
 });
 
 function calculateGrandTotal() {
@@ -116,6 +116,7 @@ function calculateGrandTotal() {
         subtotal += parseFloat($(this).find('.price').val()) || 0;
         totalTax += parseFloat($(this).find('.tax_amount').val()) || 0;
     });
+    
     let shipping = parseFloat($("#shipping_charges").val()) || 0;
     let discount = parseFloat($("#discount").val()) || 0;
     let roundOff = parseFloat($("#round_off").val()) || 0;

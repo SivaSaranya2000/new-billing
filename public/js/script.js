@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
     let lastEdited = "";
-
-    // 🔹 Purchase EXC change
+    //  Purchase EXC change
     $("#purchase_exc_tax").on("keyup change", function () {
 
         lastEdited = "exc";
@@ -15,7 +14,7 @@ $(document).ready(function () {
         $("#sell_exc_price").val(sellExc.toFixed(2));
     });
 
-    // 🔹 Purchase INC change
+    // Purchase INC change
     $("#purchase_inc_tax").on("keyup change", function () {
 
         lastEdited = "inc";
@@ -28,7 +27,7 @@ $(document).ready(function () {
         $("#sell_inc_price").val(sellInc.toFixed(2));
     });
 
-    // 🔥 COMMON TAX CALCULATION FUNCTION
+    // COMMON TAX CALCULATION FUNCTION
     function taxcalculation() {
 
         let purchaseExc = parseFloat($("#purchase_exc_tax").val()) || 0;
@@ -38,13 +37,13 @@ $(document).ready(function () {
 
         let taxVal = tax / 100;
 
-        // ✅ Selling EXC
+        // Selling EXC
         let sellExc = purchaseExc + margin;
 
-        // ✅ Tax
+        // Tax
         let taxAmount = purchaseInc * taxVal;
 
-        // ✅ Selling INC
+        // Selling INC
         let sellInc = purchaseInc + margin + taxAmount;
 
         $("#sell_exc_price").val(sellExc.toFixed(2));
@@ -52,23 +51,22 @@ $(document).ready(function () {
         $("#tax_amount").val(taxAmount.toFixed(2));
     }
 
-    // 🔥 Margin change → update BOTH
+    // Margin change → update BOTH
     $("#margin").on("keyup change", function () {
         taxcalculation();
     });
 
-    // 🔥 Tax change → update BOTH
+    // Tax change → update BOTH
     $("#tax_percentage").on("keyup change", function () {
         taxcalculation();
     });
 
-    // 🔥 Purchase change → also trigger tax calc
+    // Purchase change → also trigger tax calc
     $("#purchase_exc_tax, #purchase_inc_tax").on("keyup change", function () {
         validatePurchase();
         taxcalculation();
     });
 
-    // 🔹 Manual Selling EXC change
     $("#sell_exc_price").on("keyup change", function () {
 
         let sellExc = parseFloat($(this).val()) || 0;
@@ -79,7 +77,6 @@ $(document).ready(function () {
         $("#margin").val(margin.toFixed(2));
     });
 
-    // 🔹 Validation FIXED
     function validatePurchase() {
 
         let purchaseInc = parseFloat($("#purchase_inc_tax").val()) || 0;
@@ -95,3 +92,6 @@ $(document).ready(function () {
     }
 
 });
+
+
+
