@@ -54,10 +54,9 @@
             <th>Product</th>
             <th>Qty</th>
              <th>MRP</th>
-             <th>purchase Exc Price</th>
+             <!-- <th>purchase Exc Price</th> -->
              <th>purchase Inc Price</th>
              <th>Tax Amount</th>
-             <th>Unit Price</th>
             <th>Selling Price</th>
             <th>Action</th>
         </tr>

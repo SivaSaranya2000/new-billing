@@ -15,15 +15,14 @@ $(document).ready(function () {
                         <a href="#" class="list-group-item list-group-item-action select-product"
                            data-id="${product.id}"
                            data-name="${product.name}"
-                            data-price="${product.sell_exc_price}"
+                            data-price="${product.sell_inc_price}"
                             data-mrp="${product.mrp}"
                             data-purchase_exc_tax="${product.purchase_exc_tax}"
                             data-purchase_inc_tax="${product.purchase_inc_tax}"
                             data-unit-price="${product.unit_price}"
                             data-tax_amount="${product.tax_amount}"
-                            
                             ">
-                            ${product.name} (${product.sku}) - ₹${product.sell_exc_price}
+                            ${product.name} (${product.sku}) - ₹${product.sell_inc_price}
                         </a>
                     `;
                 });
@@ -59,19 +58,15 @@ $(document).on('click', '.select-product', function(e) {
     <td>
         <input type="number" name="mrp[]" value="${mrp}" class="form-control mrp">
     </td>
-    <td>
-        <input type="number" name="purchase_exc_tax[]" value="${purchase_exc_tax}" class="form-control purchase_exc_tax">
-    </td>
+   
     <td>
         <input type="number" name="purchase_inc_tax[]" value="${purchase_inc_tax}" class="form-control purchase_inc_tax">
     </td>
     <td>
-        <input type="number" name="tax_amount[]" value="${tax_amount}" 
-        class="form-control tax_amount" data-base-tax="${tax_amount}">
+        <input type="number" name="tax_amount[]" value="${tax_amount}"  
+        class="form-control tax_amount " readonly data-base-tax="${tax_amount}">
     </td>
-    <td>
-        <input type="number" name="unit_price[]" value="${unit_price}" class="form-control unit_price">
-    </td>
+    
     <td>
         <input type="number" name="price[]" value="${price}" 
         class="form-control price" data-base-price="${price}">
@@ -116,16 +111,15 @@ function calculateGrandTotal() {
         subtotal += parseFloat($(this).find('.price').val()) || 0;
         totalTax += parseFloat($(this).find('.tax_amount').val()) || 0;
     });
-    
+        
     let shipping = parseFloat($("#shipping_charges").val()) || 0;
     let discount = parseFloat($("#discount").val()) || 0;
     let roundOff = parseFloat($("#round_off").val()) || 0;
     let paid = parseFloat($("#paid_amount").val()) || 0;
 
-  
     let grandTotal = subtotal + totalTax + shipping - discount + roundOff;
-
     let balance = grandTotal - paid;
+
 
     // $("#grand_total").val(grandTotal.toFixed(2));
        $("#grand_total").text(grandTotal.toFixed(2));
@@ -133,11 +127,10 @@ function calculateGrandTotal() {
        $("#shipping").text(shipping.toFixed(2));
        $("#discount").text(discount.toFixed(2));
        $("#grand_total_input").val(grandTotal.toFixed(2));
-    $("#balance_amount").val(balance.toFixed(2));
+       $("#balance_amount").val(balance.toFixed(2));
 }
 
-$("#shipping_charges, #discount, #round_off, #paid_amount")
-.on("keyup change", function () {
+$("#shipping_charges, #discount, #round_off, #paid_amount").on("keyup change", function () {
     calculateGrandTotal();
 });
 $(document).on('click', '.remove-row', function () {
