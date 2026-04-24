@@ -51,7 +51,6 @@ class ProductController extends Controller
         DB::beginTransaction();
 
     try {
-        
         $product = Product::create([
             'name' => $request->name,
             'sku' => $request->sku,
@@ -66,11 +65,9 @@ class ProductController extends Controller
             'manage_stock' => $request->manage_stock ?? 0,
             'product_type' => $request->product_type,
             'tax_type' => $request->tax_type,
-           
-            ]);
+              ]);
 
-        ProductPrice::create([
-            'product_id' => $product->id,
+        ProductPrice::create([            'product_id' => $product->id,
             'mrp' => $request->mrp,
             'unit_price' => $request->unit_price,
             'purchase_exc_tax' => $request->purchase_exc_tax,
