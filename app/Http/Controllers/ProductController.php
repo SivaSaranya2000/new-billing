@@ -67,7 +67,8 @@ class ProductController extends Controller
             'tax_type' => $request->tax_type,
               ]);
 
-        ProductPrice::create([            'product_id' => $product->id,
+        ProductPrice::create([
+            'product_id' => $product->id,
             'mrp' => $request->mrp,
             'unit_price' => $request->unit_price,
             'purchase_exc_tax' => $request->purchase_exc_tax,
@@ -80,7 +81,6 @@ class ProductController extends Controller
         ]);
  
         DB::commit();
-
         return redirect()->back()->with('success', 'Product created successfully');
 
     } catch (\Exception $e) {
@@ -93,7 +93,6 @@ class ProductController extends Controller
 public function search(Request $request)
 {
     $search = $request->search;
-
     $products = DB::table('products')
         ->join('product_prices', 'products.id', '=', 'product_prices.product_id')
         ->where(function($q) use ($search) {
@@ -112,7 +111,6 @@ public function search(Request $request)
             'product_prices.mrp',
             'product_prices.unit_price',
             'product_prices.tax_amount',
-            
         )
         ->limit(15)
         ->get();

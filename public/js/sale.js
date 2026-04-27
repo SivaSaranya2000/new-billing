@@ -92,27 +92,27 @@ function addProduct(el) {
     <tr>
         <td>
             ${name}
-            <input type="hidden" name="product_id[]" value="${id}">
+            <input type="hidden" name="product_id[]" value="${id}" class="sales_types">
         </td>
 
         <td>
-            <input type="number" name="qty[]" class="form-control qty" value="1">
+            <input type="number" name="qty[]" class="form-control qty" value="1" class="sales_types">
         </td>
 
         <td>
-            <input type="number" name="price[]" class="form-control price" value="${price}">
+            <input type="number" name="price[]" class="form-control price" value="${price}" class="sales_types">
         </td>
 
         <td>
-            <input type="number" name="discount[]" class="form-control discount" value="0">
+            <input type="number" name="discount[]" class="form-control discount" value="0" class="sales_types">
         </td>
 
         <td>
-            <input type="number" name="tax_amount[]" class="form-control tax_amount" readonly>
+            <input type="number" name="tax_amount[]" class="form-control tax_amount" readonly class="sales_types">
         </td>
 
         <td>
-            <select class="form-control tax" name="tax[]">
+            <select class="form-control tax" name="tax[]" class="sales_types">
                 <option value="0">0%</option>
                 <option value="5" ${tax==5?'selected':''}>5%</option>
                 <option value="12" ${tax==12?'selected':''}>12%</option>

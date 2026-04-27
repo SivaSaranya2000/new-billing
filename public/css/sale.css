@@ -1,31 +1,31 @@
- h2{font-size:18px;font-weight:600;color:#1a3a5c;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #1a3a5c}
-  .wrap{max-width:1100px;margin:0 auto;background:#fff;border-radius:10px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
-  .section{background:#f8f9fb;border:1px solid #dde1e7;border-radius:8px;padding:16px 20px;margin-bottom:16px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
-  .field{display:flex;flex-direction:column;gap:5px}
-  label{font-size:13px;font-weight:600;color:#555}
-  label span{color:#e24b4a}
-  input,select{height:36px;border:1px solid #ccc;border-radius:6px;padding:0 10px;font-size:13px;background:#fff;color:#333;width:100%;outline:none}
-  input:focus,select:focus{border-color:#378add;box-shadow:0 0 0 2px #dceefb}
-  .due-badge{font-size:12px;color:#d85a30;font-weight:600;margin-top:2px}
-  .search-row{display:flex;gap:8px;align-items:center;margin-bottom:12px}
-  .search-row input{flex:1}
-  .add-btn{height:36px;width:36px;background:#1d9e75;border:none;border-radius:6px;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
-  .add-btn:hover{background:#178a63}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th{background:#1a3a5c;color:#fff;padding:9px 10px;text-align:center;font-weight:500}
-  td{padding:7px 10px;border-bottom:1px solid #eee;text-align:center;color:#333}
-  td input,td select{height:30px;font-size:12px;padding:0 6px}
-  .empty-row td{color:#999;font-style:italic;padding:20px}
+ .saleh2{font-size:18px;font-weight:600;color:#1a3a5c;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #1a3a5c}
+  .wrap-sells{max-width:1100px;margin:0 auto;background:#fff;border-radius:10px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+  .section-sale{background:#f8f9fb;border:1px solid #dde1e7;border-radius:8px;padding:16px 20px;margin-bottom:16px}
+  .grid2-sale{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+  .field-sale{display:flex;flex-direction:column;gap:5px}
+  .sale-label{font-size:13px;font-weight:600;color:#555}
+  .sale-label span{color:#e24b4a}
+  .sales_types{height:36px;border:1px solid #ccc;border-radius:6px;padding:0 10px;font-size:13px;background:#fff;color:#333;width:100%;outline:none}
+  .sales_types:focus{border-color:#378add;box-shadow:0 0 0 2px #dceefb}
+  .due-badges{font-size:12px;color:#d85a30;font-weight:600;margin-top:2px}
+  .search-rows{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+  .search-rows input{flex:1}
+  .add-btns{height:36px;width:36px;background:#1d9e75;border:none;border-radius:6px;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+  .add-btns:hover{background:#178a63}
+  .sale_table{width:100%;border-collapse:collapse;font-size:13px}
+  .sale_table th{background:#1a3a5c;color:#fff;padding:9px 10px;text-align:center;font-weight:500}
+  .sale_table td{padding:7px 10px;border-bottom:1px solid #eee;text-align:center;color:#333}
+  .sale_table td input,.sale_table td select{height:30px;font-size:12px;padding:0 6px}
+  .empty-rows td{color:#999;font-style:italic;padding:20px}
   .del-btn{background:none;border:none;color:#e24b4a;cursor:pointer;font-size:15px;padding:2px 6px}
   .del-btn:hover{color:#a32d2d}
-  .bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .bottoms{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
   .left-bottom,.right-summary{background:#f8f9fb;border:1px solid #dde1e7;border-radius:8px;padding:16px 20px}
   .left-bottom .field{margin-bottom:14px}
-  .summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:13px;border-bottom:1px solid #eee}
-  .summary-row:last-child{border-bottom:none;font-weight:700;font-size:15px;padding-top:10px}
+  .summary-rows{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:13px;border-bottom:1px solid #eee}
+  .summary-rows:last-child{border-bottom:none;font-weight:700;font-size:15px;padding-top:10px}
   .summary-label{color:#666}
-  .summary-val{font-weight:600;color:#333}
+  .summary-val{font-weight:600;color:#333} 
   .grand{color:#1d9e75;font-size:16px}
   .inline2{display:flex;gap:8px}
   .inline2 input,.inline2 select{flex:1}
@@ -33,7 +33,9 @@
   .action-row{display:flex;gap:10px;margin-top:16px;justify-content:flex-end}
   .btn{height:38px;padding:0 24px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none}
   .btn-primary{background:#1a3a5c;color:#fff}
-  .btn-primary:hover{background:#122a45}
+  .btn-primary:hover{background:#122a45} 
   .btn-secondary{background:#fff;border:1px solid #ccc;color:#333}
   .btn-secondary:hover{background:#f0f2f5}
   .coupon-info{display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:#888}
+
+  
