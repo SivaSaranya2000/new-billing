@@ -79,7 +79,34 @@ public function store(Request $request)
 
     return redirect()->back()->with('success', 'Sale saved successfully!');
 }
+ public function data_all_sell(Request $request)
+{
+    $sell = Sell::select(['id', 'customer_id', 'sales_code','sales_date','reference_no','grand_total']);
 
+    return DataTables::of($sell)
+
+        ->addIndexColumn() 
+
+        ->addColumn('action', function ($sell) {
+
+            $editUrl = route('products.edit', $sell->id);
+
+            return '
+                <a href="'.$editUrl.'" class="btn btn-sm btn-primary">
+                    Edit
+                </a>
+
+                <button data-id="'.$sell->id.'" 
+                    class="btn btn-sm btn-danger deleteProductBtn">
+                    Delete
+                </button>
+            ';
+        })
+
+        ->rawColumns(['action']) 
+
+        ->make(true);
+}
     /**
      * Display the specified resource.
      */

@@ -57,6 +57,8 @@ Route::post('/variations/{id}', [VariationController::class, 'update'])->name('v
 Route::get('/variations/{id}', [VariationController::class, 'destroy'])->name('variations.destroy');
 // Product Resource Route
 Route::resource('products', ProductController::class);
+Route::get('/data-all-product', [ProductController::class, 'data_all_product'])->name('data_all_product');
+
 Route::get('/variation-values/{id}', [VariationController::class, 'getValues']);
 Route::get('product-search', [ProductController::class, 'search'])->name('product.search');
 // purchase Resource Route
@@ -80,6 +82,7 @@ Route::resource('categories', CategoryController::class);
 
 //sellcontroller
 Route::resource('sell', SellController::class);
+Route::get('/data-all-sell', [SellController::class, 'data_all_sell'])->name('data_all_sell');
 
 
 

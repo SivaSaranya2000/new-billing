@@ -128,9 +128,7 @@ function addProduct(el) {
         </td>
     </tr>
     `;
-
     $("#item-body").append(row);
-
     $("#product_list").hide();
     $("#item-search").val("");
 

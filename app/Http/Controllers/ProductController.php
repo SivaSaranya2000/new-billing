@@ -25,9 +25,38 @@ class ProductController extends Controller
      */
     public function index()
     {
+        
         return view('product.index');
     }
 
+  public function data_all_product(Request $request)
+{
+    $products = Product::select(['id', 'name', 'sku','product_type']);
+
+    return DataTables::of($products)
+
+        ->addIndexColumn() 
+
+        ->addColumn('action', function ($product) {
+
+            $editUrl = route('products.edit', $product->id);
+
+            return '
+                <a href="'.$editUrl.'" class="btn btn-sm btn-primary">
+                    Edit
+                </a>
+
+                <button data-id="'.$product->id.'" 
+                    class="btn btn-sm btn-danger deleteProductBtn">
+                    Delete
+                </button>
+            ';
+        })
+
+        ->rawColumns(['action']) 
+
+        ->make(true);
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -115,7 +144,7 @@ public function search(Request $request)
         ->limit(15)
         ->get();
 
-    return response()->json($products);
+ return response()->json($products);
 }
     
      private  function variation(Request $request)

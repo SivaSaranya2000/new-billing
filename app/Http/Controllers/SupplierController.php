@@ -23,7 +23,7 @@ class SupplierController extends Controller
         return view('supplier.index');
     }
      
-   public function data_all_supplier(Request $request)
+ public function data_all_supplier(Request $request)
 {
     $suppliers = Supplier::select([
         'id', 'name', 'phone', 'email', 'supplier_code', 'gst_number', 'state', 'address'

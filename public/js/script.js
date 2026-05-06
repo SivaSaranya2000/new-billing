@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     let lastEdited = "";
     //  Purchase EXC change
     $("#purchase_exc_tax").on("keyup change", function () {
