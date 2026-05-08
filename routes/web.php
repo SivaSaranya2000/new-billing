@@ -83,6 +83,7 @@ Route::resource('categories', CategoryController::class);
 //sellcontroller
 Route::resource('sell', SellController::class);
 Route::get('/data-all-sell', [SellController::class, 'data_all_sell'])->name('data_all_sell');
+Route::get('/sell/{id}/print', [SellController::class, 'print'])->name('sell.print');
 
 
 

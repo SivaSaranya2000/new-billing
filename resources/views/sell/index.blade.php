@@ -14,16 +14,12 @@
             <th>Customer Name</th>
             <th>Sales Code</th>
             <th>Sales Date</th>
+            <th>Reference Number</th>
+            <th>Grand Total</th>
             <th>Action</th>
         </tr>
     </thead>
 
-
-
-
-
-
-    
 </table>
 </div>
 
@@ -36,14 +32,17 @@ $(document).ready(function () {
     processing: true,
     serverSide: true,
     ajax: "{{ route('data_all_sell') }}",
-    columns: [
-        
-        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false }, 
-        { data: 'customer_id', name: 'customer_id' },
+   columns: [
+        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+        { data: 'customer_name', name: 'customer.name' },
         { data: 'sales_code', name: 'sales_code' },
         { data: 'sales_date', name: 'sales_date' },
+        { data: 'reference_no', name: 'reference_no' },
+        { data: 'grand_total', name: 'grand_total' },
         { data: 'action', name: 'action', orderable: false, searchable: false }
-    ]
+    ],
+
+    order: [[2, 'desc']]
 });
 });
 </script>

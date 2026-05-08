@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sell;
 use App\Models\SaleItem;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -47,14 +48,11 @@ public function store(Request $request)
         'sales_code' => $request->sales_code,
         'sales_date' => $date,
         'reference_no' => $request->reference_no,
-
         'subtotal' => $request->subtotal,
         'other_charges' => $request->other_charges,
         'discount' => $request->discount,
         'grand_total' => $request->grand_total,
     ]);
-
-  
     foreach ($request->product_id as $key => $productId) {
 
         $qty = $request->qty[$key];
@@ -81,32 +79,38 @@ public function store(Request $request)
 }
  public function data_all_sell(Request $request)
 {
-    $sell = Sell::select(['id', 'customer_id', 'sales_code','sales_date','reference_no','grand_total']);
+    $sell = Sell::with('customer')
+        ->select(['id', 'customer_id', 'sales_code', 'sales_date', 'reference_no', 'grand_total']);
 
     return DataTables::of($sell)
 
-        ->addIndexColumn() 
+        ->addIndexColumn()
+
+        ->addColumn('customer_name', function ($sell) {
+            return $sell->customer->name ?? 'N/A';
+        })
 
         ->addColumn('action', function ($sell) {
-
             $editUrl = route('products.edit', $sell->id);
+            $printurl = route('sell.print', $sell->id);
 
             return '
-                <a href="'.$editUrl.'" class="btn btn-sm btn-primary">
-                    Edit
-                </a>
-
-                <button data-id="'.$sell->id.'" 
-                    class="btn btn-sm btn-danger deleteProductBtn">
-                    Delete
-                </button>
+                <a href="'.$editUrl.'" class="btn btn-sm btn-primary">Edit</a>
+                <button data-id="'.$sell->id.'" class="btn btn-sm btn-danger deleteProductBtn">Delete</button>
+                <a href="'.$printurl.'" class="btn btn-sm btn-primary">Print Bill</a>
             ';
         })
 
-        ->rawColumns(['action']) 
-
+        ->rawColumns(['action'])
         ->make(true);
+        
 }
+public function print($id)
+    {
+    $sell = Sell::with(['customer', 'items.product'])->findOrFail($id);
+       return view('sell.bill', compact('sell'));
+    }
+
     /**
      * Display the specified resource.
      */
