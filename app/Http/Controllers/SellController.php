@@ -110,6 +110,7 @@ public function print($id)
     $sell = Sell::with(['customer', 'items.product'])->findOrFail($id);
        return view('sell.bill', compact('sell'));
     }
+    
 
     /**
      * Display the specified resource.

@@ -1,215 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
 
-@extends('layout.nav')
+    <title>Invoice</title>
 
-@section('content')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="container mt-4">
+    <style>
 
-    <div class="card shadow border-0">
+        body{
+            background:#f5f5f5;
+        }
 
-        <div class="card-body">
+        .invoice-box{
+            background:#fff;
+            padding:30px;
+            max-width:900px;
+            margin:auto;
+            margin-top:30px;
+            border:1px solid #ddd;
+        }
 
-            <!-- Header -->
-            <div class="row mb-4">
+        @media print {
 
-                <div class="col-md-6">
-                    <h2 class="fw-bold text-primary">INVOICE</h2>
+            .no-print{
+                display:none !important;
+            }
 
-                    <h5 class="mt-3">Billing Application</h5>
+            body{
+                background:#fff;
+            }
 
-                    <p class="mb-0">
-                        Chennai, Tamil Nadu
-                    </p>
+            .invoice-box{
+                border:none;
+                margin:0;
+                width:100%;
+            }
+        }
 
-                    <p>
-                        Phone: +91 9876543210
-                    </p>
-                </div> 
+    </style>
 
-                <div class="col-md-6 text-end">
+</head>
 
-                    <h5>
-                        Invoice No :
-                        <span class="text-dark">
-                            {{ $sell->sales_code }}
-                        </span>
-                    </h5>
+<body>
 
-                    <h6>
-                        Date :
-                        {{ date('d-m-Y', strtotime($sell->sales_date)) }}
-                    </h6>
+<div class="container">
 
-                    <h6>
-                        Reference :
-                        {{ $sell->reference_no }}
-                    </h6>
-                </div>
+    <div class="invoice-box">
 
-            </div>
+        <!-- Header -->
+        <div class="row mb-4">
 
-            <!-- Customer -->
-            <div class="row mb-4">
+            <div class="col-6">
 
-                <div class="col-md-6">
+                <h2 class="fw-bold text-primary">
+                    INVOICE
+                </h2>
 
-                    <div class="border rounded p-3 bg-light">
+                <h5>Billing Application</h5>
 
-                        <h5 class="fw-bold">
-                            Customer Details
-                        </h5>
+                <p class="mb-0">
+                    Chennai, Tamil Nadu
+                </p>
 
-                        <p class="mb-1">
-                            Name :
-                            {{ $sell->customer->name ?? 'Walk-in Customer' }}
-                        </p>
-
-                        <p class="mb-1">
-                            Phone :
-                            {{ $sell->customer->phone ?? '-' }}
-                        </p>
-
-                        <p class="mb-0">
-                            Address :
-                            {{ $sell->customer->address ?? '-' }}
-                        </p>
-
-                    </div>
-
-                </div>
+                <p>
+                    Phone: +91 9876543210
+                </p>
 
             </div>
 
-            <!-- Items -->
-            <div class="table-responsive">
+            <div class="col-6 text-end">
 
-                <table class="table table-bordered align-middle">
+                <h5>
+                    Invoice No :
+                    {{ $sell->sales_code }}
+                </h5>
 
-                    <thead class="table-dark">
+                <p>
+                    Date :
+                    {{ date('d-m-Y', strtotime($sell->sales_date)) }}
+                </p>
 
-                        <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Qty</th>
-                            <th>Price</th>
-                            <th>Discount</th>
-                            <th>Tax %</th>
-                            <th>Tax Amt</th>
-                            <th>Total</th>
-                        </tr>
+                <p>
+                    Reference :
+                    {{ $sell->reference_no }}
+                </p>
 
-                    </thead>
+            </div>
 
-                    <tbody>
+        </div>
 
-                        @php
-                            $i = 1;
-                        @endphp
+        <!-- Customer -->
+        <div class="card mb-4">
 
-                        @foreach($sell->items as $item)
+            <div class="card-body">
 
-                        <tr>
+                <h5 class="fw-bold">
+                    Customer Details
+                </h5>
 
-                            <td>{{ $i++ }}</td>
+                <p class="mb-1">
+                    Name :
+                    {{ $sell->customer->name ?? 'Walk-in Customer' }}
+                </p>
 
-                            <td>
-                                {{ $item->product->name ?? '' }}
-                            </td>
+                <p class="mb-1">
+                    Phone :
+                    {{ $sell->customer->phone ?? '-' }}
+                </p>
 
-                            <td>{{ $item->qty }}</td>
+                <p class="mb-0">
+                    Address :
+                    {{ $sell->customer->address ?? '-' }}
+                </p>
 
-                            <td>
-                                ₹{{ number_format($item->price, 2) }}
-                            </td>
+            </div>
 
-                            <td>
-                                ₹{{ number_format($item->discount, 2) }}
-                            </td>
+        </div>
 
-                            <td>
-                                {{ $item->tax }}%
-                            </td>
+        <!-- Table -->
+        <table class="table table-bordered">
 
-                            <td>
-                                ₹{{ number_format($item->tax_amount, 2) }}
-                            </td>
+            <thead class="table-dark">
 
-                            <td class="fw-bold">
-                                ₹{{ number_format($item->total, 2) }}
-                            </td>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Tax %</th>
+                    <th>Tax Amt</th>
+                    <th>Total</th>
+                </tr>
 
-                        </tr>
+            </thead>
 
-                        @endforeach
+            <tbody>
 
-                    </tbody>
+                @foreach($sell->items as $key => $item)
+
+                <tr>
+
+                    <td>{{ $key + 1 }}</td>
+
+                    <td>
+                        {{ $item->product->name ?? '' }}
+                    </td>
+
+                    <td>{{ $item->qty }}</td>
+
+                    <td>
+                        ₹{{ number_format($item->price,2) }}
+                    </td>
+
+                    <td>
+                        ₹{{ number_format($item->discount,2) }}
+                    </td>
+
+                    <td>
+                        {{ $item->tax }}%
+                    </td>
+
+                    <td>
+                        ₹{{ number_format($item->tax_amount,2) }}
+                    </td>
+
+                    <td>
+                        ₹{{ number_format($item->total,2) }}
+                    </td>
+
+                </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+        <!-- Totals -->
+        <div class="row justify-content-end">
+
+            <div class="col-md-5">
+
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Subtotal</th>
+                        <td class="text-end">
+                            ₹{{ number_format($sell->subtotal,2) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Other Charges</th>
+                        <td class="text-end">
+                            ₹{{ number_format($sell->other_charges,2) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Discount</th>
+                        <td class="text-end">
+                            ₹{{ number_format($sell->discount,2) }}
+                        </td>
+                    </tr>
+
+                    <tr class="table-success">
+
+                        <th>
+                            Grand Total
+                        </th>
+
+                        <th class="text-end">
+                            ₹{{ number_format($sell->grand_total,2) }}
+                        </th>
+
+                    </tr>
 
                 </table>
 
             </div>
 
-            <!-- Summary -->
-            <div class="row mt-4">
+        </div>
 
-                <div class="col-md-6"></div>
+        <!-- Buttons -->
+        <div class="text-center mt-4 no-print">
 
-                <div class="col-md-6">
+            <button onclick="window.print()"
+                class="btn btn-primary">
+                Print Invoice
+            </button>
 
-                    <table class="table table-bordered">
-
-                        <tr>
-                            <th>Subtotal</th>
-                            <td class="text-end">
-                                ₹{{ number_format($sell->subtotal, 2) }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>Other Charges</th>
-                            <td class="text-end">
-                                ₹{{ number_format($sell->other_charges, 2) }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>Discount</th>
-                            <td class="text-end">
-                                ₹{{ number_format($sell->discount, 2) }}
-                            </td>
-                        </tr>
-
-                        <tr class="table-success">
-
-                            <th class="fs-5">
-                                Grand Total
-                            </th>
-
-                            <th class="text-end fs-5">
-                                ₹{{ number_format($sell->grand_total, 2) }}
-                            </th>
-
-                        </tr>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-            <!-- Buttons -->
-            <div class="text-center mt-4">
-
-                <button onclick="window.print()"
-                    class="btn btn-primary">
-                    Print Invoice
-                </button>
-
-                <a href="{{ url()->previous() }}"
-                    class="btn btn-secondary">
-                    Back
-                </a>
-
-            </div>
+            <a href="{{ url()->previous() }}"
+                class="btn btn-secondary">
+                Back
+            </a>
 
         </div>
 
@@ -217,4 +243,5 @@
 
 </div>
 
-@endsection
+</body>
+</html>
