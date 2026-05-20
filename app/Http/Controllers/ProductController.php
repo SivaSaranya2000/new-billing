@@ -162,9 +162,14 @@ public function search(Request $request)
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $variations = Variation::all();
+        $units = Unit::all();
+        $brands = Brand::all();
+        $business = Business::all();
+        $product = Product::findOrFail($id);
+        return view('product.edit', compact('variations', 'units', 'brands', 'business','product'));
     }
 
     /**
