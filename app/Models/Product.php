@@ -17,6 +17,7 @@ class Product extends Model
         'sub_category',
         'business_location',
         'alert_quantity',
+        'opening_stock',
         'manage_stock',
         'product_type',
         'tax_type',

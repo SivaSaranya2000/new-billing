@@ -1,0 +1,61 @@
+<div class="row"  id="single_section">
+  <table class="table table-bordered">
+    <tr>
+      <th>MRP</th>
+      <!-- <th>Unit price</th> -->
+      <th>Default Purchase Price</th>
+      <th>X margin(%)</th>
+      <th>Default Selling Price</th>
+    </tr>
+    <tr>
+    <td>
+      <div class="col-md-12">
+        &nbsp;
+        <input type="text" class="form-control mt-2" name="mrp" value="{{$product->price->mrp}}" id="mrp" placeholder="Enter MRP">
+      </div>
+    </td>
+    <!-- <td>
+      <div class="col-md-12">
+        &nbsp;
+        <input type="text" class="form-control mt-2" name="unit_price" id="unit_price" placeholder="Enter unit_price">
+      </div>
+    </td> -->
+    <td>
+      <div class="row">
+      <div class="col-md-6">
+        <label class="form-label">Exc Tax:*</label>
+        <input type="text" class="form-control" name="purchase_exc_tax" value="{{$product->price->purchase_exc_tax}}" id="purchase_exc_tax" placeholder="Enter Exc Tax">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Inc Tax:*</label>
+        <input type="text" class="form-control" name="purchase_inc_tax" value="{{$product->price->purchase_inc_tax}}"  id="purchase_inc_tax" placeholder="Enter Inc Tax">
+      </div>
+      </div>
+    </td>
+    <td>
+      <div class="col-md-12">
+        &nbsp;
+  <input type="text" class="form-control mt-2" name="margin" value="{{$product->price->margin}}" id="margin" placeholder="Enter Margin">
+  <input type="hidden" class="form-control mt-2" name="tax_amount" value="{{$product->price->tax_amount}}"  id="tax_amount">
+    </div>
+</td>
+   <td>
+    <!-- <div class="row"> -->
+    <div class="col-md-12">
+      <label class="form-label">Selling price:</label>
+      <input type="hidden" class="form-control" name="sell_exc_price"  value="{{$product->price->sell_exc_price}}" id="sell_exc_price" placeholder="Enter Sale Price">
+       <input type="text" class="form-control" name="sell_inc_price" value="{{$product->price->sell_inc_price}}" id="sell_inc_price" value="" placeholder="Enter Sale Price">
+
+    </div>
+<!-- <div class="col-md-6"> -->
+  <!-- <label class="form-label">Inc Tax:</label> -->
+
+<!-- </div> -->
+    <!-- </div> -->
+    </td>
+    </tr>
+  </table>
+  
+
+</div>
+<div id="priceAlert" class="alert alert-danger d-none"></div>

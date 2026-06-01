@@ -91,6 +91,7 @@ class ProductController extends Controller
             'sub_category' => $request->sub_category,
             'business_location' => $request->business_location,
             'alert_quantity' => $request->alert_quantity,
+            'opening_stock' => $request->opening_stock,
             'manage_stock' => $request->manage_stock ?? 0,
             'product_type' => $request->product_type,
             'tax_type' => $request->tax_type,
@@ -168,18 +169,76 @@ public function search(Request $request)
         $units = Unit::all();
         $brands = Brand::all();
         $business = Business::all();
-        $product = Product::findOrFail($id);
+        $product = Product::with('price')->findOrFail($id);
+
         return view('product.edit', compact('variations', 'units', 'brands', 'business','product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required',
+    ]);
 
+    DB::beginTransaction();
+
+    try {
+
+        $product = Product::findOrFail($id);
+
+        // Update Product Table
+        $product->update([
+            'name' => $request->name,
+            'sku' => $request->sku,
+            'hsn_code' => $request->hsn_code,
+            'barcode_type' => $request->barcode_type,
+            'unit' => $request->unit,
+            'brand' => $request->brand,
+            'category' => $request->category,
+            'sub_category' => $request->sub_category,
+            'business_location' => $request->business_location,
+            'alert_quantity' => $request->alert_quantity,
+            'opening_stock' => $request->opening_stock,
+            'manage_stock' => $request->manage_stock ?? 0,
+            'product_type' => $request->product_type,
+            'tax_type' => $request->tax_type,
+        ]);
+
+        // Update Product Price Table
+        ProductPrice::updateOrCreate(
+            ['product_id' => $product->id],
+            [
+                'mrp' => $request->mrp,
+                'unit_price' => $request->unit_price,
+                'purchase_exc_tax' => $request->purchase_exc_tax,
+                'purchase_inc_tax' => $request->purchase_inc_tax,
+                'margin' => $request->margin,
+                'sell_exc_price' => $request->sell_exc_price,
+                'sell_inc_price' => $request->sell_inc_price,
+                'tax_percentage' => $request->tax_percentage,
+                'tax_amount' => $request->tax_amount,
+            ]
+        );
+
+        DB::commit();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product updated successfully');
+
+    } catch (\Exception $e) {
+
+        DB::rollBack();
+
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', $e->getMessage());
+    }
+}
     /**
      * Remove the specified resource from storage.
      */

@@ -3,8 +3,8 @@
  <div class="content">
 
 <div class="card p-4 mt-1">
-    <h3 class="text-center ">Add Product</h3>
-<form id="productForm" action="{{ route('products.store') }}" method="POST" class="row g-3 mt-3">
+    <h3 class="text-center ">Edit Product</h3>
+<form id="productForm" action="{{ route('products.update', $product->id) }}" method="POST" class="row g-3 mt-3">
       @csrf
 
       <div class="col-md-4">
@@ -134,6 +134,7 @@
           <option value="18">18%</option>
           <option value="28">28%</option>
         </select>  
+        
      </div>
       <div class="col-md-4">
     <label class="form-label">Selling price Tax Type:</label>
@@ -144,7 +145,6 @@
             {{ $product->tax_type == 'inclusive' ? 'selected' : '' }}>
             Inclusive
         </option>
-
         <option value="exclusive"
             {{ $product->tax_type == 'exclusive' ? 'selected' : '' }}>
             Exclusive
@@ -155,11 +155,11 @@
     
      
     <hr/>
-    @include('product.partials.single')
+    @include('product.partials.single_edit')
     @include('product.partials.variation')
    <div class="row mt-3">
     <div class="col-12 d-flex justify-content-center">
-        <button type="submit" class="btn btn-success" id="addProductBtn">Add Product</button>
+        <button type="submit" class="btn btn-success" id="addProductBtn">Update Product</button>
     </div>
 </div>
 
